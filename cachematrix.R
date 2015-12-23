@@ -1,8 +1,7 @@
-## Put comments here that give an overall description of what your
-## functions do
 
 ## This function creates a special "matrix" object
 ## that can cache its inverse.
+## must pass it an invertable (square) matrix
 
 makeCacheMatrix <- function(x = matrix()) {
 
@@ -32,12 +31,10 @@ cacheSolve <- function(x, ...) {
         message("getting cached data")
         return(m)
     }
-    ## need to pass dimensions to the matrix to make it square
-    ## else it won't invert
-    l <- as.integer(sqrt(length(x$get)))
-    data <- matrix(x$get(), l, l)
+    ## if what is passed to makeCacheMatrix is already a square matrix 
+    ## as instructions say to assume, this works as predicted.
+    data <- x$get()
     m <- solve(data, ...)
     x$setinverse(m)
     m
-    ## curently returning a 1x1 matrix - not the same size don't know why
 }
